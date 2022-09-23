@@ -1,0 +1,34 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+        enabled: true
+        namespace: psq
+      config:
+        server-addr: localhost:8848
+        file-extension: yml
+        namespace: psq
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: "root"
+    password: "root"
+    hikari:
+      connection-timeout: 30000 #等待连接池分配连接的最大时长(毫秒)，超过这个时长还没可用的连接则发生SQLException， 缺省:30秒
+      idle-timeout: 600000 #一个连接idle状态的最大时长(毫秒)，超时则被释放(retired)，缺省:10分钟
+      max-lifetime: 1800000 #一个连接的生命时长(毫秒)，超时而且没被使用则被释放(retired)，缺省:30分钟，建议设置比数据库超时时长少30秒以上，参考MySQL wait_timeout参数(show variables like '%timeout%';)
+      maximum-pool-size: 9 #连接池中允许的最大连接数。缺省值：10; 推荐的公式：((core_count * 2) + effective_spindle_count)
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 10000
+    database: 0
+    pool:
+      max-active: 500
+      max-idle: 50
+      max-wait: -1
+      min-idle: 10

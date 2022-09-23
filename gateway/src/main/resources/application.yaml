@@ -1,0 +1,35 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: gateway-service
+  profiles:
+    active: dev
+  cloud:
+    gateway:
+      routes:
+        - id: member-service
+          predicates:
+            - name: Path
+              args:
+                pattern: "/member/**"
+          filters:
+            - name: StripPrefix
+              args:
+                parts: '1'
+          uri: lb://member-service
+          metadata: { }
+          order: 2147483647
+
+        - id: push-service
+          predicates:
+            - name: Path
+              args:
+                pattern: "/push/**"
+          filters:
+            - name: StripPrefix
+              args:
+                parts: '1'
+          uri: lb://push-service
+          metadata: { }
+          order: 2147483647

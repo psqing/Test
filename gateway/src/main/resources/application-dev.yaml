@@ -1,0 +1,23 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+        enabled: true
+        namespace: psq
+      config:
+        server-addr: localhost:8848
+        file-extension: yml
+        namespace: psq
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 10000
+    database: 0
+    pool:
+      max-active: 500
+      max-idle: 50
+      max-wait: -1
+      min-idle: 10
